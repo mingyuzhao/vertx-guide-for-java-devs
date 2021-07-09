@@ -30,7 +30,7 @@ import io.vertx.ext.auth.jdbc.JDBCAuth;
 import io.vertx.ext.auth.jwt.JWTAuth;
 import io.vertx.ext.auth.jwt.JWTAuthOptions;
 import io.vertx.ext.jdbc.JDBCClient;
-import io.vertx.ext.jwt.JWTOptions;
+import io.vertx.ext.auth.JWTOptions;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.client.HttpResponse;
@@ -80,7 +80,7 @@ public class HttpServerVerticle extends AbstractVerticle {
 
     webClient = WebClient.create(vertx, new WebClientOptions()
       .setSsl(true)
-      .setUserAgent("vert-x3"));
+      .setUserAgent("vert-x4"));
 
     // tag::https-server[]
     HttpServer server = vertx.createHttpServer(new HttpServerOptions()
@@ -104,7 +104,7 @@ public class HttpServerVerticle extends AbstractVerticle {
 
     router.route().handler(BodyHandler.create());
     router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)));
-    router.route().handler(UserSessionHandler.create(auth));  // <1>
+    // router.route().handler(UserSessionHandler.create(auth));  // <1>
 
     AuthenticationHandler authHandler = RedirectAuthHandler.create(auth, "/login"); // <2>
     router.route("/").handler(authHandler);  // <3>

@@ -45,7 +45,7 @@ public class MainVerticle extends AbstractVerticle {
       return deployPromise.future();
     });
 
-    authDeploymentFuture.setHandler(ar -> {
+    authDeploymentFuture.onComplete(ar -> {
       if (ar.succeeded()) {
         promise.complete();
       } else {

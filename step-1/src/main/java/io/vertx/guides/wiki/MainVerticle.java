@@ -284,14 +284,14 @@ public class MainVerticle extends AbstractVerticle {
   @Override
   public void start(Promise<Void> promise) throws Exception {
     Future<Void> steps = prepareDatabase().compose(v -> startHttpServer());
-    steps.setHandler(promise);
+    steps.onComplete(promise);
   }
   // end::start[]
 
   public void anotherStart(Promise<Void> promise) throws Exception {
     // tag::another-start[]
     Future<Void> steps = prepareDatabase().compose(v -> startHttpServer());
-    steps.setHandler(ar -> {  // <1>
+    steps.onComplete(ar -> {  // <1>
       if (ar.succeeded()) {
         promise.complete();
       } else {

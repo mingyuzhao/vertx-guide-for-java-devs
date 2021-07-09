@@ -28,7 +28,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.core.net.JksOptions;
 import io.vertx.ext.auth.KeyStoreOptions;
 import io.vertx.ext.auth.jwt.JWTAuthOptions;
-import io.vertx.ext.jwt.JWTOptions;
+import io.vertx.ext.auth.JWTOptions;
 import io.vertx.ext.web.client.WebClientOptions;
 import io.vertx.guides.wiki.database.reactivex.WikiDatabaseService;
 import io.vertx.reactivex.core.AbstractVerticle;
@@ -105,7 +105,7 @@ public class HttpServerVerticle extends AbstractVerticle {
 
     router.route().handler(BodyHandler.create());
     router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)));
-    router.route().handler(UserSessionHandler.create(auth));
+    // router.route().handler(UserSessionHandler.create(auth));
 
     AuthenticationHandler authHandler = RedirectAuthHandler.create(auth, "/login");
     router.route("/").handler(authHandler);

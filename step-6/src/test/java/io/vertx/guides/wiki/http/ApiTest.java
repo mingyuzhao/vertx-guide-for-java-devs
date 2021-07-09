@@ -118,7 +118,7 @@ public class ApiTest {
       return promise.future();
     });
 
-    deletePageFuture.setHandler(ar -> {
+    deletePageFuture.onComplete(ar -> {
       if (ar.succeeded()) {
         context.assertTrue(ar.result().body().getBoolean("success"));
         async.complete();

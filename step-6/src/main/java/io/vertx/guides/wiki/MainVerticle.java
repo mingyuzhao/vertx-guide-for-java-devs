@@ -44,7 +44,7 @@ public class MainVerticle extends AbstractVerticle {
       return deployHttpPromise.future();
     });
 
-    deployHttpFuture.setHandler(ar -> {
+    deployHttpFuture.onComplete(ar -> {
       if (ar.succeeded()) {
         promise.complete();
       } else {

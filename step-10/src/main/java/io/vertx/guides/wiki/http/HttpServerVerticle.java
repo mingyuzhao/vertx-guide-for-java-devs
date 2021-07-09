@@ -24,7 +24,7 @@ import io.vertx.core.Promise;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.bridge.PermittedOptions;
-import io.vertx.ext.web.handler.sockjs.BridgeOptions;
+import io.vertx.ext.web.handler.sockjs.SockJSBridgeOptions;
 import io.vertx.guides.wiki.database.reactivex.WikiDatabaseService;
 import io.vertx.reactivex.core.AbstractVerticle;
 import io.vertx.reactivex.core.http.HttpServer;
@@ -67,7 +67,7 @@ public class HttpServerVerticle extends AbstractVerticle {
 
     // tag::sockjs-handler-setup[]
     SockJSHandler sockJSHandler = SockJSHandler.create(vertx); // <1>
-    BridgeOptions bridgeOptions = new BridgeOptions()
+    SockJSBridgeOptions bridgeOptions = new SockJSBridgeOptions()
       .addInboundPermitted(new PermittedOptions().setAddress("app.markdown"))  // <2>
       .addOutboundPermitted(new PermittedOptions().setAddress("page.saved")); // <3>
     sockJSHandler.bridge(bridgeOptions); // <4>
